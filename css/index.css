@@ -1,19 +1,15 @@
-.container-fluid
-{
-    
-}
-.collapse
-{
-  height: 75px;
-}
 .logo
 {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
 }
 .navbar-brand
 {
   padding-left: 10px;
+  height: 50px;
+}
+.active {
+  background-color: #717171;
 }
 .left-column1
 {
@@ -37,28 +33,28 @@
 {
   height: 400px;
   border-style: solid;
-  border-width: 5px;
+  border-width: 4px;
   padding-top: 10px;
 }
 .second-product
 {
   height: 400px;
   border-style: solid;
-  border-width: 5px;
+  border-width: 4px;
   padding-top: 10px;
 }
 .third-product
 {
   height: 400px;
   border-style: solid;
-  border-width: 5px;
+  border-width: 4px;
   padding-top: 10px;
 }
 .fourth-product
 {
   height: 400px;
   border-style: solid;
-  border-width: 5px;
+  border-width: 4px;
   padding-top: 10px;
 }
 .logo-img
@@ -112,7 +108,4 @@
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-}
-.active {
-  background-color: #717171;
 }
