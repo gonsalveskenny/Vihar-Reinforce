@@ -1,23 +1,194 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>HOME</title>
-		<link rel="stylesheet" type="text/css" href="css/home.css">
+		<title>ORDERS</title>
+		<link rel="stylesheet" type="text/css" href="css/place-order.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+		<script>
+			/* Set rates + misc */
+			var taxRate = 0.05;
+			var shippingRate = 15.00;
+			var fadeTime = 300;
+
+
+			/* Assign actions */
+			$('.product-quantity input').change( function() {
+			updateQuantity(this);
+			});
+
+			$('.product-removal button').click( function() {
+			removeItem(this);
+			});
+
+
+			/* Recalculate cart */
+			function recalculateCart()
+			{
+			var subtotal = 0;
+
+			/* Sum up row totals */
+			$('.product').each(function () {
+				subtotal += parseFloat($(this).children('.product-line-price').text());
+			});
+
+			/* Calculate totals */
+			var tax = subtotal * taxRate;
+			var shipping = (subtotal > 0 ? shippingRate : 0);
+			var total = subtotal + tax + shipping;
+
+			/* Update totals display */
+			$('.totals-value').fadeOut(fadeTime, function() {
+				$('#cart-subtotal').html(subtotal.toFixed(2));
+				$('#cart-tax').html(tax.toFixed(2));
+				$('#cart-shipping').html(shipping.toFixed(2));
+				$('#cart-total').html(total.toFixed(2));
+				if(total == 0){
+					$('.checkout').fadeOut(fadeTime);
+				}else{
+					$('.checkout').fadeIn(fadeTime);
+				}
+				$('.totals-value').fadeIn(fadeTime);
+			});
+			}
+
+
+			/* Update quantity */
+			function updateQuantity(quantityInput)
+			{
+			/* Calculate line price */
+			var productRow = $(quantityInput).parent().parent();
+			var price = parseFloat(productRow.children('.product-price').text());
+			var quantity = $(quantityInput).val();
+			var linePrice = price * quantity;
+
+			/* Update line price display and recalc cart totals */
+			productRow.children('.product-line-price').each(function () {
+				$(this).fadeOut(fadeTime, function() {
+					$(this).text(linePrice.toFixed(2));
+					recalculateCart();
+					$(this).fadeIn(fadeTime);
+				});
+			});
+			}
+
+
+			/* Remove item from cart */
+			function removeItem(removeButton)
+			{
+			/* Remove row from DOM and recalc cart total */
+			var productRow = $(removeButton).parent().parent();
+			productRow.slideUp(fadeTime, function() {
+				productRow.remove();
+				recalculateCart();
+			});
+			}
+		</script>
 	</head>
 	<body>
-		<!--Container Starts-->
-		<div class="container">
-			<!--Header-->
-			<div class="header">
-				<!--Logo-->
-				<div class="logo">
-					<img class="logo-img" src="images/logo.png">
+		<section class="hero-section">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+				<img class="logo" src="images/logo.png">
+				<a class="navbar-brand" href="#"><h1>Vihar-Reinforce</h1></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="#"><h2>Home</h2><span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#"><h2>Products</h2></a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="#"><h2>Orders</h2></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link " href="#"><h2>Bill</h2></a>
+						</li>
+					</ul>
 				</div>
-				<!--Navigation Bar-->
-				<div class="nav-links">
-					<h1>Home | Product |<font color="Black">Place Order</font> | Payment</h1>
+			</nav>
+			<div class="container-fluid">
+				<h1>Cart</h1>
+				<div class="shopping-cart">
+
+				  <div class="column-labels">
+				    <label class="product-image">Image</label>
+				    <label class="product-details">Product</label>
+				    <label class="product-price">Price</label>
+				    <label class="product-quantity">Quantity</label>
+				    <label class="product-removal">Remove</label>
+				    <label class="product-line-price">Total</label>
+				  </div>
+
+				  <div class="product">
+				    <div class="product-image">
+				      <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
+				    </div>
+				    <div class="product-details">
+				      <div class="product-title">Dingo Dog Bones</div>
+				      <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
+				    </div>
+				    <div class="product-price">12.99</div>
+				    <div class="product-quantity">
+				      <input type="number" value="2" min="1">
+				    </div>
+				    <div class="product-removal">
+				      <button class="remove-product">
+				        Remove
+				      </button>
+				    </div>
+				    <div class="product-line-price">25.98</div>
+				  </div>
+
+				  <div class="product">
+				    <div class="product-image">
+				      <img src="https://s.cdpn.io/3/large-NutroNaturalChoiceAdultLambMealandRiceDryDogFood.png">
+				    </div>
+				    <div class="product-details">
+				      <div class="product-title">Nutro™ Adult Lamb and Rice Dog Food</div>
+				      <p class="product-description">Who doesn't like lamb and rice? We've all hit the halal cart at 3am while quasi-blackout after a night of binge drinking in Manhattan. Now it's your dog's turn!</p>
+				    </div>
+				    <div class="product-price">45.99</div>
+				    <div class="product-quantity">
+				      <input type="number" value="1" min="1">
+				    </div>
+				    <div class="product-removal">
+				      <button class="remove-product">
+				        Remove
+				      </button>
+				    </div>
+				    <div class="product-line-price">45.99</div>
+				  </div>
+
+				  <div class="totals">
+				    <div class="totals-item">
+				      <label>Subtotal</label>
+				      <div class="totals-value" id="cart-subtotal">71.97</div>
+				    </div>
+				    <div class="totals-item">
+				      <label>Tax (5%)</label>
+				      <div class="totals-value" id="cart-tax">3.60</div>
+				    </div>
+				    <div class="totals-item">
+				      <label>Shipping</label>
+				      <div class="totals-value" id="cart-shipping">15.00</div>
+				    </div>
+				    <div class="totals-item totals-item-total">
+				      <label>Grand Total</label>
+				      <div class="totals-value" id="cart-total">90.57</div>
+				    </div>
+				  </div>
+
+				      <button class="checkout">Checkout</button>
+
 				</div>
 			</div>
-		</div>
+		</section>
 	</body>
 </html>
