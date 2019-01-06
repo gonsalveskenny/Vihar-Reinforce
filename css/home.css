@@ -1,0 +1,119 @@
+.container-fluid
+{
+    background-image: url('../images/pubgbackground.jpeg');
+    background-size: cover;
+}
+.collapse
+{
+  height: 75px;
+}
+.logo
+{
+  width: 70px;
+  height: 70px;
+}
+.navbar-brand
+{
+  padding-left: 10px;
+}
+.left-column1
+{
+  padding-top: 30px;
+}
+.right-column1
+{
+  padding-top: 30px;
+}
+.left-column2
+{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.right-column2
+{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.first-product
+{
+  height: 400px;
+  border-style: solid;
+  border-width: 5px;
+  padding-top: 10px;
+}
+.second-product
+{
+  height: 400px;
+  border-style: solid;
+  border-width: 5px;
+  padding-top: 10px;
+}
+.third-product
+{
+  height: 400px;
+  border-style: solid;
+  border-width: 5px;
+  padding-top: 10px;
+}
+.fourth-product
+{
+  height: 400px;
+  border-style: solid;
+  border-width: 5px;
+  padding-top: 10px;
+}
+.logo-img
+{
+  width: 25%;
+  height: 25%;
+  padding-left: 10px;
+}
+.healthkit-img
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+}
+.ammo-img
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+}
+.scope-img
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+}
+.mySlides
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mySlides1
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mySlides2
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;;
+}
+.mySlides3
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.active {
+  background-color: #717171;
+}

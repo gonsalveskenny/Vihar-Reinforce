@@ -1,0 +1,43 @@
+body, html {
+  height: 100%;
+}
+.container
+{
+  width: 1335px;
+  height: 930px;
+}
+.header
+{
+  width: 1335px;
+  height: 125px;
+}
+.logo
+{
+  float:left;
+  padding-left: 10px;
+  padding-top: 10px;
+  color: black;
+}
+.nav-links
+{
+  width: 565px;
+  float:right;
+  padding-left: 10px;
+  padding-top: 20px;
+  color: black;
+  padding-right: 10px;
+}
+.bg-image {
+
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
