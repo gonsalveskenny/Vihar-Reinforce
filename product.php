@@ -42,7 +42,7 @@ $id = $_GET["id"];
     <section class="hero-section">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
 				<img class="logo" src="images/logo.png">
-			  <a class="navbar-brand" href="index.php"><h1>Vihar</h1></a>
+			  <a class="navbar-brand" href="index.php"><h1>Vihar-Reinforce</h1></a>
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
