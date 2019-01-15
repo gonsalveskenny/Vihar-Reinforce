@@ -163,7 +163,7 @@ $id = $_GET["id"];
     </div>
     <div class="product_desc">
       <h1><?php echo $row["product_name"];?></h1>
-      <span class="sale_price">Rs <?php echo $row["product_price"];?></span>
+      <span class="sale_price">$<?php echo $row["product_price"];?></span>
       <div class="description">
         <p><?php echo $row["product_description"];?></P>
     </div>
@@ -189,7 +189,6 @@ $id = $_GET["id"];
   ?>
   </div>
       </div>
-      <!--<div class="footer">© Copyright Vihar. All Rights Reserved.</div>-->
     </div>
 		</section>
 	</body>

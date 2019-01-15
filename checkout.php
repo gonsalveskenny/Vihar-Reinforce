@@ -1,3 +1,14 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "vihar-reinforce";
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,6 +16,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 		<meta content='width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0' name='viewport'/>
 		<link rel="stylesheet" type="text/css" href="css/cart.css">
+		<link rel="stylesheet" type="text/css" href="css/checkout.css">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	</head>
@@ -12,7 +24,7 @@
 		<section class="hero-section">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
 				<img class="logo" src="images/logo.png">
-			  <a class="navbar-brand" href="index.php"><h1>Vihar-Reinforce</h1></a>
+			  <a class="navbar-brand" href="index.php"><h1>Vihar</h1></a>
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
@@ -26,10 +38,82 @@
 			          Products
 			        </a>
 			        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-			          <a class="dropdown-item" href="#">Kar98</a>
-			          <a class="dropdown-item" href="#">Health Kit</a>
-			          <a class="dropdown-item" href="#">Ammo</a>
-								<a class="dropdown-item" href="#">Scope</a>
+                <?php
+                $sql = "SELECT * FROM product_details where product_id='1';";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while($row = mysqli_fetch_assoc($result))
+                    { ?>
+			          <a class="dropdown-item" href="product.php?id=<?php echo $row["product_id"]; ?>">
+                  <?php
+									        echo $row["product_name"];
+									    }
+									}
+
+									else {
+									    echo "0 results";
+									}
+									?>
+								</a>
+                <?php
+                $sql = "SELECT * FROM product_details where product_id='2';";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while($row = mysqli_fetch_assoc($result))
+                    { ?>
+			          <a class="dropdown-item" href="product.php?id=<?php echo $row["product_id"]; ?>">
+                  <?php
+									        echo $row["product_name"];
+									    }
+									}
+
+									else {
+									    echo "0 results";
+									}
+									?>
+								</a>
+                <?php
+                $sql = "SELECT * FROM product_details where product_id='3';";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while($row = mysqli_fetch_assoc($result))
+                    { ?>
+			          <a class="dropdown-item" href="product.php?id=<?php echo $row["product_id"]; ?>">
+									<?php
+									        echo $row["product_name"];
+									    }
+									}
+
+									else {
+									    echo "0 results";
+									}
+									?>
+								</a>
+                <?php
+                $sql = "SELECT * FROM product_details where product_id='4';";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while($row = mysqli_fetch_assoc($result))
+                    { ?>
+								<a class="dropdown-item" href="product.php?id=<?php echo $row["product_id"]; ?>">
+                  <?php
+									        echo $row["product_name"];
+									    }
+									}
+
+									else {
+									    echo "0 results";
+									}
+									?>
+								</a>
 			        </div>
 			      </li>
 			      <li class="nav-item">
@@ -53,12 +137,35 @@
 					<div class="col-sm-6">
 					<h6 class="mb-3">To:</h6>
 					<div>
-					<strong>Webz Poland</strong>
+						<?php
+				    $sql = "SELECT * FROM user_details ORDER BY id DESC LIMIT 1";
+				    $result = mysqli_query($conn, $sql);
+
+				    if (mysqli_num_rows($result) > 0) {
+				        // output data of each row
+				        while($row = mysqli_fetch_assoc($result))
+				        { ?>
+					<strong><?php echo $row["name"];?></strong>
 					</div>
-					<div>Madalinskiego 8</div>
-					<div>71-101 Szczecin, Poland</div>
-					<div>Email: info@webz.com.pl</div>
-					<div>Phone: +48 444 666 3333</div>
+					<div><?php echo $row["address_line_1"];?></div>
+					<?php
+						if($row["address_line_2"] != '') {
+							?>
+							<div><?php echo $row["address_line_2"];?></div>
+							<?php
+						}
+					 ?>
+					<div><?php echo $row["city"];?>, <?php echo $row["state"];?></div>
+					<div><?php echo $row["country"];?> <?php echo $row["zip_code"];?></div>
+					<div>Email: <?php echo $row["email"];?></div>
+					<div>Phone: +91 <?php echo $row["phone"];?></div>
+				<?php }
+				}
+
+				else {
+						echo "0 results";
+				}
+				?>
 					</div>
 					</div>
 					<div class="table-responsive-sm">
@@ -67,32 +174,38 @@
 					<tr>
 					<th class="center">#</th>
 					<th>Item</th>
-					<th>Description</th>
 
 					<th class="right">Unit Cost</th>
 					  <th class="center">Qty</th>
-					<th class="right">Total</th>
+					<th class="righttotal">Total</th>
 					</tr>
 					</thead>
 					<tbody>
-					<tr>
-					<td class="center">1</td>
-					<td class="left strong">Kar98</td>
-					<td class="left">Sniper</td>
+						<?php
+				    $sql = "SELECT * FROM cart";
+				    $result = mysqli_query($conn, $sql);
 
-					<td class="right">$12.99</td>
-					<td class="center">2</td>
-					<td class="right">$25.98</td>
-					</tr>
+				    if (mysqli_num_rows($result) > 0) {
+				        // output data of each row
+								$count = 1;
+								$total = 0;
+				        while($row = mysqli_fetch_assoc($result))
+				        { ?>
 					<tr>
-					<td class="center">2</td>
-					<td class="left">Health Kit</td>
-					<td class="left">Healing</td>
+					<td class="center"><?php echo $count; $count = $count + 1;?></td>
+					<td class="left strong"><?php echo $row["order_item"];?></td>
 
-					<td class="right">$45.99</td>
-					<td class="center">1</td>
-					<td class="right">$45.99</td>
+					<td class="right">$<?php echo $row["order_price"];?></td>
+					<td class="center"><?php echo $row["order_quantity"];?></td>
+					<td class="righttotal">$<?php echo $row["order_total"]; $total = $total + $row["order_total"];?></td>
 					</tr>
+				<?php }
+				}
+
+				else {
+						echo "0 results";
+				}
+				?>
 					<!--
 					<tr>
 					<td class="center">3</td>
@@ -128,13 +241,13 @@
 					<td class="left">
 					<strong>Subtotal</strong>
 					</td>
-					<td class="right">$71.97</td>
+					<td class="right">$<?php echo $total; ?></td>
 					</tr>
 					<tr>
 					<td class="left">
 					<strong>Tax (5%)</strong>
 					</td>
-					<td class="right">$3.6</td>
+					<td class="right">$<?php $tax = (0.05 * $total); echo $tax; ?></td>
 					</tr>
 					<tr>
 					<td class="left">
@@ -147,7 +260,7 @@
 					<strong>Total</strong>
 					</td>
 					<td class="right">
-					<strong>$90.57</strong>
+					<strong>$<?php echo ($total + $tax + 15); ?></strong>
 					</td>
 					</tr>
 					</tbody>
